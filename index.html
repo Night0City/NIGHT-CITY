@@ -3,168 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Night City Hub | نايت ستي</title>
+    <title>NIGHT CITY | نايت ستي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon: #8B00FF;
-            --dark: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
+            --primary: #8B00FF; /* بنفسجي نيون */
+            --bg: #050505;
+            --accent: #00ff88; /* أخضر نيون للحالة */
         }
 
         body {
-            background-color: var(--dark);
-            background-image: radial-gradient(circle at center, #1a0033 0%, #050505 100%);
+            background-color: var(--bg);
             color: white;
             font-family: 'Cairo', sans-serif;
             margin: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 50%, #1a0033 0%, #050505 100%),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
         }
 
-        /* تأثير الكربون الفخم في الخلفية */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            opacity: 0.1;
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 600px;
-            width: 90%;
-            margin: 50px 0;
+        .main-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 0, 255, 0.3);
+            padding: 40px;
+            border-radius: 30px;
             text-align: center;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(139, 0, 255, 0.1);
         }
 
-        header h1 {
-            font-size: 3.5rem;
+        h1 {
+            font-size: 3rem;
             margin: 0;
-            letter-spacing: 6px;
-            color: var(--neon);
-            text-shadow: 0 0 20px var(--neon);
-            animation: glow 2s ease-in-out infinite alternate;
+            letter-spacing: 5px;
+            background: linear-gradient(to bottom, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(139, 0, 255, 0.5);
         }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 10px var(--neon); }
-            to { text-shadow: 0 0 30px var(--neon), 0 0 50px #fff; }
+        .time-box {
+            font-size: 1.5rem;
+            color: #888;
+            margin: 15px 0;
+            font-family: monospace;
         }
 
-        .glass-card {
-            background: var(--glass);
-            border: 1px solid rgba(139, 0, 255, 0.2);
-            padding: 30px;
-            border-radius: 25px;
-            backdrop-filter: blur(15px);
-            margin: 20px 0;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        .about-section {
+            margin: 25px 0;
+            font-size: 1rem;
+            color: #bbb;
+            line-height: 1.6;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 15px 0;
         }
 
-        .about-title { color: var(--neon); font-size: 1.5rem; margin-bottom: 10px; }
-        .about-text { color: #ccc; line-height: 1.6; font-size: 1.1rem; }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 20px 0;
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 25px;
         }
 
-        .stat-item {
-            background: rgba(139, 0, 255, 0.1);
-            padding: 20px;
+        .stat-card {
+            background: rgba(139, 0, 255, 0.05);
+            padding: 15px;
             border-radius: 15px;
-            border: 1px dashed var(--neon);
+            border: 1px solid rgba(139, 0, 255, 0.2);
+            flex: 1;
+            margin: 0 5px;
         }
 
-        .stat-value { font-size: 1.8rem; font-weight: bold; display: block; }
+        .stat-num {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
 
         .btn-join {
             display: block;
-            background: var(--neon);
+            background: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 20px;
+            padding: 18px;
             border-radius: 50px;
-            font-size: 1.4rem;
             font-weight: bold;
-            box-shadow: 0 0 20px var(--neon);
-            transition: 0.4s;
-            margin-top: 30px;
+            font-size: 1.2rem;
+            box-shadow: 0 0 25px var(--primary);
+            transition: 0.3s ease;
         }
 
         .btn-join:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 40px var(--neon);
-            background: #a020f0;
+            transform: scale(1.03);
+            box-shadow: 0 0 40px var(--primary);
+            background: #9d26ff;
         }
 
-        .clock { font-size: 1.2rem; color: #888; margin-top: 10px; }
+        footer {
+            margin-top: 30px;
+            font-size: 0.7rem;
+            color: #444;
+            letter-spacing: 2px;
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
+    <div class="main-card">
         <header>
             <h1>NIGHT CITY</h1>
-            <div class="clock" id="clock">00:00:00</div>
+            <div class="time-box" id="clock">00:00:00</div>
         </header>
 
-        <div class="glass-card">
-            <div class="about-title">من نحن؟</div>
-            <div class="about-text">
-                نحن سيرفر **نايت ستي رول بلاي**، عالمنا مبني على الفخامة والواقعية. نقدم لك تجربة فريدة في عالم الحياة الواقعية، حيث تجتمع القيادة والإبداع.
+        <div class="about-section">
+            نحن سيرفر <strong>نايت ستي رول بلاي</strong>. نقدم تجربة حياة واقعية فريدة، فخامة القيادة، وبناء المجتمع الأفضل.
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <span class="stat-num" id="member-count">--</span>
+                <span class="stat-label">عضو متصل</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-num" style="color: var(--accent);">Active</span>
+                <span class="stat-label">حالة السيرفر</span>
             </div>
         </div>
 
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span class="stat-value" id="pop-count">...</span>
-                <span style="font-size: 0.8rem; color: #888;">عضو متصل الآن</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value" style="color: #00ff88;">ONLINE</span>
-                <span style="font-size: 0.8rem; color: #888;">حالة النظام</span>
-            </div>
-        </div>
+        <a href="https://discord.gg/VzUVxJBGFZ" target="_blank" class="btn-join">دخول السيرفر ⚡</a>
 
-        <a href="Https://discord.gg/VzUVxJBGFZ" target="_blank" class="btn-join">انضم إلى السيرفر الآن ⚡</a>
-
-        <div style="margin-top: 40px; opacity: 0.3; font-size: 0.8rem; letter-spacing: 3px;">
-            DEVELOPED BY HUSSAIN | 2026
-        </div>
+        <footer>DEVELOPED BY HUSSAIN | 2026</footer>
     </div>
 
     <script>
-        function updateTime() {
+        // تحديث الساعة بتوقيت البحرين/السعودية
+        function updateClock() {
             const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString('ar-BH', { 
-                timeZone: 'Asia/Riyadh', hour: '2-digit', minute: '2-digit', second: '2-digit' 
-            });
+            const options = { timeZone: 'Asia/Riyadh', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB', options);
         }
-        setInterval(updateTime, 1000);
-        updateTime();
+        setInterval(updateClock, 1000);
+        updateClock();
 
-        async function getStats() {
-            // الآيدي الخاص بسيرفرك
-            const guildId = "1490328240919941232";
+        // جلب عدد الأعضاء الحقيقي
+        async function fetchDiscord() {
             try {
-                const res = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`);
-                const data = await res.json();
-                // عرض عدد المتواجدين حالياً
-                document.getElementById('pop-count').innerText = data.presence_count || "0";
-            } catch (e) {
-                document.getElementById('pop-count').innerText = "OFFLINE";
+                // آيدي سيرفرك
+                const response = await fetch('https://discord.com/api/guilds/1490328240919941232/widget.json');
+                const data = await response.json();
+                document.getElementById('member-count').innerText = data.presence_count;
+            } catch (error) {
+                document.getElementById('member-count').innerText = "0";
             }
         }
-        getStats();
-        setInterval(getStats, 30000); // تحديث كل 30 ثانية
+        fetchDiscord();
+        setInterval(fetchDiscord, 30000); // تحديث كل 30 ثانية
     </script>
 </body>
 </html>
