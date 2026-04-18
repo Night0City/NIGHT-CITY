@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Night City Hub | نايت ستي</title>
+    <style>
+        :root {
+            --neon: #8B00FF;
+            --dark: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        body {
+            background-color: var(--dark);
+            background-image: radial-gradient(circle at center, #1a0033 0%, #050505 100%);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* تأثير الكربون الفخم في الخلفية */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            letter-spacing: 6px;
+            color: var(--neon);
+            text-shadow: 0 0 20px var(--neon);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--neon); }
+            to { text-shadow: 0 0 30px var(--neon), 0 0 50px #fff; }
+        }
+
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid rgba(139, 0, 255, 0.2);
+            padding: 30px;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            margin: 20px 0;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .about-title { color: var(--neon); font-size: 1.5rem; margin-bottom: 10px; }
+        .about-text { color: #ccc; line-height: 1.6; font-size: 1.1rem; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-item {
+            background: rgba(139, 0, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px dashed var(--neon);
+        }
+
+        .stat-value { font-size: 1.8rem; font-weight: bold; display: block; }
+
+        .btn-join {
+            display: block;
+            background: var(--neon);
+            color: white;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 0 20px var(--neon);
+            transition: 0.4s;
+            margin-top: 30px;
+        }
+
+        .btn-join:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px var(--neon);
+            background: #a020f0;
+        }
+
+        .clock { font-size: 1.2rem; color: #888; margin-top: 10px; }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>NIGHT CITY</h1>
+            <div class="clock" id="clock">00:00:00</div>
+        </header>
+
+        <div class="glass-card">
+            <div class="about-title">من نحن؟</div>
+            <div class="about-text">
+                نحن سيرفر **نايت ستي رول بلاي**، عالمنا مبني على الفخامة والواقعية. نقدم لك تجربة فريدة في عالم الحياة الواقعية، حيث تجتمع القيادة والإبداع.
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-value" id="pop-count">...</span>
+                <span style="font-size: 0.8rem; color: #888;">عضو متصل الآن</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" style="color: #00ff88;">ONLINE</span>
+                <span style="font-size: 0.8rem; color: #888;">حالة النظام</span>
+            </div>
+        </div>
+
+        <a href="Https://discord.gg/VzUVxJBGFZ" target="_blank" class="btn-join">انضم إلى السيرفر الآن ⚡</a>
+
+        <div style="margin-top: 40px; opacity: 0.3; font-size: 0.8rem; letter-spacing: 3px;">
+            DEVELOPED BY HUSSAIN | 2026
+        </div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString('ar-BH', { 
+                timeZone: 'Asia/Riyadh', hour: '2-digit', minute: '2-digit', second: '2-digit' 
+            });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        async function getStats() {
+            // الآيدي الخاص بسيرفرك
+            const guildId = "1490328240919941232";
+            try {
+                const res = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`);
+                const data = await res.json();
+                // عرض عدد المتواجدين حالياً
+                document.getElementById('pop-count').innerText = data.presence_count || "0";
+            } catch (e) {
+                document.getElementById('pop-count').innerText = "OFFLINE";
+            }
+        }
+        getStats();
+        setInterval(getStats, 30000); // تحديث كل 30 ثانية
+    </script>
+</body>
+</html>
